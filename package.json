@@ -1,5 +1,5 @@
 {
-  "name": "capacitor-apply-pay",
+  "name": "capacitor-apple-pay",
   "version": "0.0.1",
   "description": "Implement apple pay to mobile app",
   "main": "dist/plugin.cjs.js",
@@ -13,7 +13,7 @@
     "ios/Sources",
     "ios/Tests",
     "Package.swift",
-    "CapacitorApplyPay.podspec"
+    "CapacitorApplePay.podspec"
   ],
   "author": "yryskeldi",
   "license": "MIT",
@@ -31,7 +31,7 @@
   ],
   "scripts": {
     "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
-    "verify:ios": "xcodebuild -scheme CapacitorApplyPay -destination generic/platform=iOS",
+    "verify:ios": "xcodebuild -scheme CapacitorApplePay -destination generic/platform=iOS",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
     "verify:web": "npm run build",
     "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
@@ -39,7 +39,7 @@
     "eslint": "eslint . --ext ts",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
     "swiftlint": "node-swiftlint",
-    "docgen": "docgen --api CapacitorApplyPayPlugin --output-readme README.md --output-json dist/docs.json",
+    "docgen": "docgen --api CapacitorApplePayPlugin --output-readme README.md --output-json dist/docs.json",
     "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",

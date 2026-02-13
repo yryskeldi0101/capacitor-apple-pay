@@ -1,11 +1,11 @@
-# capacitor-apply-pay
+# capacitor-apple-pay
 
 Implement apple pay to mobile app
 
 ## Install
 
 ```bash
-npm install capacitor-apply-pay
+npm install capacitor-apple-pay
 npx cap sync
 ```
 

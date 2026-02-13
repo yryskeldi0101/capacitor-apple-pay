@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@capacitor/core": "latest",
-    "capacitor-apply-pay": "file:..",
+    "capacitor-apple-pay": "file:..",
     "@capacitor/ios": "8.0.0",
     "@capacitor/android": "8.0.0"
   },

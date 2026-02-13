@@ -4,7 +4,7 @@ import type {
   AddCardProvisioningData,
   CanAddCardResult,
   CanMakePaymentsResult,
-  CapacitorApplyPayPlugin,
+  CapacitorApplePayPlugin,
   CompleteAddCardResult,
   CompletePaymentResult,
   IsCardInWalletResult,
@@ -12,7 +12,7 @@ import type {
   PaymentAuthorizationResult,
 } from './definitions';
 
-export class CapacitorApplyPayWeb extends WebPlugin implements CapacitorApplyPayPlugin {
+export class CapacitorApplePayWeb extends WebPlugin implements CapacitorApplePayPlugin {
   async canAddCard(): Promise<CanAddCardResult> {
     return {
       canAddCard: false,

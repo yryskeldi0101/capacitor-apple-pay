@@ -1,10 +1,10 @@
 import { registerPlugin } from '@capacitor/core';
 
-import type { CapacitorApplyPayPlugin } from './definitions';
+import type { CapacitorApplePayPlugin } from './definitions';
 
-const CapacitorApplyPay = registerPlugin<CapacitorApplyPayPlugin>('CapacitorApplyPay', {
-  web: () => import('./web').then((m) => new m.CapacitorApplyPayWeb()),
+const CapacitorApplePay = registerPlugin<CapacitorApplePayPlugin>('CapacitorApplePay', {
+  web: () => import('./web').then((m) => new m.CapacitorApplePayWeb()),
 });
 
 export * from './definitions';
-export { CapacitorApplyPay };
+export { CapacitorApplePay };

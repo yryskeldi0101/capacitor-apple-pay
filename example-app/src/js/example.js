@@ -1,6 +1,6 @@
-import { CapacitorApplyPay } from 'capacitor-apply-pay';
+import { CapacitorApplePay } from 'capacitor-apple-pay';
 
 window.testEcho = () => {
     const inputValue = document.getElementById("echoInput").value;
-    CapacitorApplyPay.echo({ value: inputValue })
+    CapacitorApplePay.echo({ value: inputValue })
 }

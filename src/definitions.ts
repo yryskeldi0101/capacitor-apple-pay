@@ -168,7 +168,7 @@ export interface DeviceChangedEvent {
   remotePassCount: number;
 }
 
-export interface CapacitorApplyPayPlugin {
+export interface CapacitorApplePayPlugin {
   canAddCard(): Promise<CanAddCardResult>;
   canMakePayments(options?: CanMakePaymentsOptions): Promise<CanMakePaymentsResult>;
   isCardInWallet(options?: IsCardInWalletOptions): Promise<IsCardInWalletResult>;
