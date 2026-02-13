@@ -1,0 +1,1167 @@
+{
+  "api": {
+    "name": "CapacitorApplePayPlugin",
+    "slug": "capacitorapplepayplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "canAddCard",
+        "signature": "() => Promise<CanAddCardResult>",
+        "parameters": [],
+        "returns": "Promise<CanAddCardResult>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "CanAddCardResult"
+        ],
+        "slug": "canaddcard"
+      },
+      {
+        "name": "canMakePayments",
+        "signature": "(options?: CanMakePaymentsOptions | undefined) => Promise<CanMakePaymentsResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "CanMakePaymentsOptions | undefined"
+          }
+        ],
+        "returns": "Promise<CanMakePaymentsResult>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "CanMakePaymentsResult",
+          "CanMakePaymentsOptions"
+        ],
+        "slug": "canmakepayments"
+      },
+      {
+        "name": "isCardInWallet",
+        "signature": "(options?: IsCardInWalletOptions | undefined) => Promise<IsCardInWalletResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "IsCardInWalletOptions | undefined"
+          }
+        ],
+        "returns": "Promise<IsCardInWalletResult>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "IsCardInWalletResult",
+          "IsCardInWalletOptions"
+        ],
+        "slug": "iscardinwallet"
+      },
+      {
+        "name": "startAddCard",
+        "signature": "(options: StartAddCardOptions) => Promise<AddCardProvisioningData>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "StartAddCardOptions"
+          }
+        ],
+        "returns": "Promise<AddCardProvisioningData>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "AddCardProvisioningData",
+          "StartAddCardOptions"
+        ],
+        "slug": "startaddcard"
+      },
+      {
+        "name": "completeAddCard",
+        "signature": "(options: CompleteAddCardOptions) => Promise<CompleteAddCardResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "CompleteAddCardOptions"
+          }
+        ],
+        "returns": "Promise<CompleteAddCardResult>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "CompleteAddCardResult",
+          "CompleteAddCardOptions"
+        ],
+        "slug": "completeaddcard"
+      },
+      {
+        "name": "presentPaymentSheet",
+        "signature": "(options: PresentPaymentSheetOptions) => Promise<PaymentAuthorizationResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "PresentPaymentSheetOptions"
+          }
+        ],
+        "returns": "Promise<PaymentAuthorizationResult>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PaymentAuthorizationResult",
+          "PresentPaymentSheetOptions"
+        ],
+        "slug": "presentpaymentsheet"
+      },
+      {
+        "name": "completePayment",
+        "signature": "(options: CompletePaymentOptions) => Promise<CompletePaymentResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "CompletePaymentOptions"
+          }
+        ],
+        "returns": "Promise<CompletePaymentResult>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "CompletePaymentResult",
+          "CompletePaymentOptions"
+        ],
+        "slug": "completepayment"
+      },
+      {
+        "name": "onTokenStatusChanged",
+        "signature": "() => Promise<ObserveResult>",
+        "parameters": [],
+        "returns": "Promise<ObserveResult>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "ObserveResult"
+        ],
+        "slug": "ontokenstatuschanged"
+      },
+      {
+        "name": "onCardRemoved",
+        "signature": "() => Promise<ObserveResult>",
+        "parameters": [],
+        "returns": "Promise<ObserveResult>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "ObserveResult"
+        ],
+        "slug": "oncardremoved"
+      },
+      {
+        "name": "onDeviceChanged",
+        "signature": "() => Promise<ObserveResult>",
+        "parameters": [],
+        "returns": "Promise<ObserveResult>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "ObserveResult"
+        ],
+        "slug": "ondevicechanged"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'tokenStatusChanged', listenerFunc: (event: TokenStatusChangedEvent) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'tokenStatusChanged'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(event: TokenStatusChangedEvent) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "TokenStatusChangedEvent"
+        ],
+        "slug": "addlistenertokenstatuschanged-"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'cardRemoved', listenerFunc: (event: CardRemovedEvent) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'cardRemoved'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(event: CardRemovedEvent) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "CardRemovedEvent"
+        ],
+        "slug": "addlistenercardremoved-"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'deviceChanged', listenerFunc: (event: DeviceChangedEvent) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'deviceChanged'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(event: DeviceChangedEvent) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "DeviceChangedEvent"
+        ],
+        "slug": "addlistenerdevicechanged-"
+      },
+      {
+        "name": "removeAllListeners",
+        "signature": "() => Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "removealllisteners"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "CanAddCardResult",
+      "slug": "canaddcardresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "canAddCard",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "canAddPaymentPass",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "entitlementChecks",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "EntitlementChecks"
+          ],
+          "type": "EntitlementChecks"
+        },
+        {
+          "name": "reasons",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string[]"
+        }
+      ]
+    },
+    {
+      "name": "EntitlementChecks",
+      "slug": "entitlementchecks",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "inAppPayments",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "paymentPassProvisioning",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "CanMakePaymentsResult",
+      "slug": "canmakepaymentsresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "canMakePayments",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "CanMakePaymentsOptions",
+      "slug": "canmakepaymentsoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "supportedNetworks",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "ApplePayNetwork"
+          ],
+          "type": "ApplePayNetwork[] | undefined"
+        }
+      ]
+    },
+    {
+      "name": "IsCardInWalletResult",
+      "slug": "iscardinwalletresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "isCardInWallet",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "matches",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "WalletCardMatch"
+          ],
+          "type": "WalletCardMatch[]"
+        }
+      ]
+    },
+    {
+      "name": "WalletCardMatch",
+      "slug": "walletcardmatch",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "serialNumber",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "primaryAccountIdentifier",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "primaryAccountNumberSuffix",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "deviceAccountIdentifier",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "isRemote",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "deviceName",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "IsCardInWalletOptions",
+      "slug": "iscardinwalletoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "cardId",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "cardSuffix",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "AddCardProvisioningData",
+      "slug": "addcardprovisioningdata",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "cardId",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "certificates",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string[]"
+        },
+        {
+          "name": "nonce",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "nonceSignature",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "StartAddCardOptions",
+      "slug": "startaddcardoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "cardId",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "cardholderName",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "primaryAccountSuffix",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "localizedDescription",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "paymentNetwork",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "ApplePayNetwork"
+          ],
+          "type": "ApplePayNetwork"
+        }
+      ]
+    },
+    {
+      "name": "CompleteAddCardResult",
+      "slug": "completeaddcardresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "submitted",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "CompleteAddCardOptions",
+      "slug": "completeaddcardoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "activationData",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "encryptedPassData",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "ephemeralPublicKey",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "PaymentAuthorizationResult",
+      "slug": "paymentauthorizationresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "tokenData",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "transactionIdentifier",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "paymentMethod",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "PaymentMethodInfo"
+          ],
+          "type": "PaymentMethodInfo"
+        }
+      ]
+    },
+    {
+      "name": "PaymentMethodInfo",
+      "slug": "paymentmethodinfo",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "displayName",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "network",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "type",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "PresentPaymentSheetOptions",
+      "slug": "presentpaymentsheetoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "merchantIdentifier",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "countryCode",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "currencyCode",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "paymentSummaryItems",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "PaymentSummaryItem"
+          ],
+          "type": "PaymentSummaryItem[]"
+        },
+        {
+          "name": "supportedNetworks",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "ApplePayNetwork"
+          ],
+          "type": "ApplePayNetwork[] | undefined"
+        },
+        {
+          "name": "merchantCapabilities",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "MerchantCapability"
+          ],
+          "type": "MerchantCapability[] | undefined"
+        },
+        {
+          "name": "requiredBillingContactFields",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "ContactField"
+          ],
+          "type": "ContactField[] | undefined"
+        },
+        {
+          "name": "requiredShippingContactFields",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "ContactField"
+          ],
+          "type": "ContactField[] | undefined"
+        },
+        {
+          "name": "shippingType",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "ShippingType"
+          ],
+          "type": "ShippingType"
+        }
+      ]
+    },
+    {
+      "name": "PaymentSummaryItem",
+      "slug": "paymentsummaryitem",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "label",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "type",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "PaymentSummaryItemType"
+          ],
+          "type": "PaymentSummaryItemType"
+        }
+      ]
+    },
+    {
+      "name": "CompletePaymentResult",
+      "slug": "completepaymentresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "completed",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "CompletePaymentOptions",
+      "slug": "completepaymentoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "status",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "PaymentCompletionStatus"
+          ],
+          "type": "PaymentCompletionStatus"
+        },
+        {
+          "name": "errors",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string[] | undefined"
+        }
+      ]
+    },
+    {
+      "name": "ObserveResult",
+      "slug": "observeresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "listening",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => Promise<void>"
+        }
+      ]
+    },
+    {
+      "name": "TokenStatusChangedEvent",
+      "slug": "tokenstatuschangedevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "status",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "serialNumber",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "primaryAccountIdentifier",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "primaryAccountNumberSuffix",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "activationState",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "isRemote",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "deviceName",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "CardRemovedEvent",
+      "slug": "cardremovedevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "serialNumber",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "primaryAccountIdentifier",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "primaryAccountNumberSuffix",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "deviceAccountIdentifier",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "isRemote",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "deviceName",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "DeviceChangedEvent",
+      "slug": "devicechangedevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remotePassCount",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "number"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [
+    {
+      "name": "ApplePayNetwork",
+      "slug": "applepaynetwork",
+      "docs": "",
+      "types": [
+        {
+          "text": "'amex'",
+          "complexTypes": []
+        },
+        {
+          "text": "'carteBancaires'",
+          "complexTypes": []
+        },
+        {
+          "text": "'chinaUnionPay'",
+          "complexTypes": []
+        },
+        {
+          "text": "'discover'",
+          "complexTypes": []
+        },
+        {
+          "text": "'eftpos'",
+          "complexTypes": []
+        },
+        {
+          "text": "'electron'",
+          "complexTypes": []
+        },
+        {
+          "text": "'idCredit'",
+          "complexTypes": []
+        },
+        {
+          "text": "'interac'",
+          "complexTypes": []
+        },
+        {
+          "text": "'JCB'",
+          "complexTypes": []
+        },
+        {
+          "text": "'mada'",
+          "complexTypes": []
+        },
+        {
+          "text": "'maestro'",
+          "complexTypes": []
+        },
+        {
+          "text": "'masterCard'",
+          "complexTypes": []
+        },
+        {
+          "text": "'privateLabel'",
+          "complexTypes": []
+        },
+        {
+          "text": "'quicPay'",
+          "complexTypes": []
+        },
+        {
+          "text": "'suica'",
+          "complexTypes": []
+        },
+        {
+          "text": "'visa'",
+          "complexTypes": []
+        },
+        {
+          "text": "'vPay'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "PaymentSummaryItemType",
+      "slug": "paymentsummaryitemtype",
+      "docs": "",
+      "types": [
+        {
+          "text": "'final'",
+          "complexTypes": []
+        },
+        {
+          "text": "'pending'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "MerchantCapability",
+      "slug": "merchantcapability",
+      "docs": "",
+      "types": [
+        {
+          "text": "'threeDS'",
+          "complexTypes": []
+        },
+        {
+          "text": "'credit'",
+          "complexTypes": []
+        },
+        {
+          "text": "'debit'",
+          "complexTypes": []
+        },
+        {
+          "text": "'emv'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "ContactField",
+      "slug": "contactfield",
+      "docs": "",
+      "types": [
+        {
+          "text": "'name'",
+          "complexTypes": []
+        },
+        {
+          "text": "'emailAddress'",
+          "complexTypes": []
+        },
+        {
+          "text": "'phoneNumber'",
+          "complexTypes": []
+        },
+        {
+          "text": "'postalAddress'",
+          "complexTypes": []
+        },
+        {
+          "text": "'phoneticName'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "ShippingType",
+      "slug": "shippingtype",
+      "docs": "",
+      "types": [
+        {
+          "text": "'shipping'",
+          "complexTypes": []
+        },
+        {
+          "text": "'delivery'",
+          "complexTypes": []
+        },
+        {
+          "text": "'storePickup'",
+          "complexTypes": []
+        },
+        {
+          "text": "'servicePickup'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "PaymentCompletionStatus",
+      "slug": "paymentcompletionstatus",
+      "docs": "",
+      "types": [
+        {
+          "text": "'success'",
+          "complexTypes": []
+        },
+        {
+          "text": "'failure'",
+          "complexTypes": []
+        },
+        {
+          "text": "'canceled'",
+          "complexTypes": []
+        },
+        {
+          "text": "'invalidBillingPostalAddress'",
+          "complexTypes": []
+        },
+        {
+          "text": "'invalidShippingPostalAddress'",
+          "complexTypes": []
+        },
+        {
+          "text": "'invalidShippingContact'",
+          "complexTypes": []
+        },
+        {
+          "text": "'pinRequired'",
+          "complexTypes": []
+        },
+        {
+          "text": "'pinIncorrect'",
+          "complexTypes": []
+        },
+        {
+          "text": "'pinLockout'",
+          "complexTypes": []
+        }
+      ]
+    }
+  ],
+  "pluginConfigs": []
+}
