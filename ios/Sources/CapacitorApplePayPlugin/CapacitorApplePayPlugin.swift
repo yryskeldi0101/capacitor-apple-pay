@@ -25,6 +25,7 @@ public class CapacitorApplePayPlugin: CAPPlugin, CAPBridgedPlugin {
     private var pendingAddCardCall: CAPPluginCall?
     private var pendingAddCardCompletion: ((PKAddPaymentPassRequest) -> Void)?
     private var pendingAddCardCardId: String?
+    private var lastAddCardInitDebugMessage: String?
 
     private var pendingPaymentCall: CAPPluginCall?
     private var pendingPaymentCompletion: ((PKPaymentAuthorizationResult) -> Void)?
@@ -123,16 +124,27 @@ public class CapacitorApplePayPlugin: CAPPlugin, CAPBridgedPlugin {
             return
         }
 
-        guard let addCardController = makeAddCardController(from: call, cardId: cardId) else {
-            call.reject("Unable to initialize PKAddPaymentPassViewController.")
+        let suffix = call.getString("primaryAccountSuffix")?.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let suffix, suffix.count >= 4 else {
+            call.reject("primaryAccountSuffix is required and must contain at least 4 characters.")
             return
         }
 
-        pendingAddCardCall = call
-        pendingAddCardCardId = cardId
-
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
+
+            guard let addCardController = self.makeAddCardController(from: call, cardId: cardId) else {
+                let debugMessage = self.lastAddCardInitDebugMessage ?? "unknown"
+                call.reject(
+                    "Unable to initialize PKAddPaymentPassViewController. primaryAccountSuffix=\(suffix). details=\(debugMessage)"
+                )
+                self.resetAddCardState()
+                return
+            }
+
+            self.pendingAddCardCall = call
+            self.pendingAddCardCardId = cardId
+
             guard let viewController = self.bridge?.viewController else {
                 self.pendingAddCardCall?.reject("Unable to access root view controller.")
                 self.resetAddCardState()
@@ -317,31 +329,71 @@ public class CapacitorApplePayPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     private func makeAddCardController(from call: CAPPluginCall, cardId: String) -> PKAddPaymentPassViewController? {
-        guard let configuration = PKAddPaymentPassRequestConfiguration(encryptionScheme: .ECC_V2) else {
+        let suffix = call.getString("primaryAccountSuffix")?.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let resolvedSuffix = suffix, !resolvedSuffix.isEmpty else {
+            lastAddCardInitDebugMessage = "primaryAccountSuffix is missing."
             return nil
         }
-        configuration.primaryAccountIdentifier = cardId
 
-        if let cardholderName = call.getString("cardholderName"), !cardholderName.isEmpty {
+        let providedCardholderName = call.getString("cardholderName")?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let resolvedCardholderName = (providedCardholderName?.isEmpty == false ? providedCardholderName : nil) ?? "Cardholder"
+
+        let localizedDescription = call.getString("localizedDescription")?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let resolvedLocalizedDescription = (localizedDescription?.isEmpty == false ? localizedDescription : nil) ?? "Card ending \(resolvedSuffix)"
+
+        let paymentNetworkRaw = call.getString("paymentNetwork")
+        let parsedPaymentNetwork = paymentNetworkRaw.flatMap { Self.paymentNetwork(from: $0) }
+
+        func buildController(cardholderName: String, paymentNetwork: PKPaymentNetwork?) -> PKAddPaymentPassViewController? {
+            guard let configuration = PKAddPaymentPassRequestConfiguration(encryptionScheme: .ECC_V2) else {
+                return nil
+            }
+
+            if let primaryAccountIdentifier = call.getString("primaryAccountIdentifier"),
+               !primaryAccountIdentifier.isEmpty {
+                configuration.primaryAccountIdentifier = primaryAccountIdentifier
+            }
+
             configuration.cardholderName = cardholderName
+            configuration.primaryAccountSuffix = resolvedSuffix
+            configuration.localizedDescription = resolvedLocalizedDescription
+
+            if let paymentNetwork {
+                configuration.paymentNetwork = paymentNetwork
+            }
+
+            return PKAddPaymentPassViewController(requestConfiguration: configuration, delegate: self)
         }
 
-        let suffix = call.getString("primaryAccountSuffix")?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let resolvedSuffix = (suffix?.isEmpty == false ? suffix : nil) ?? String(cardId.suffix(4))
-        configuration.primaryAccountSuffix = resolvedSuffix
-
-        if let localizedDescription = call.getString("localizedDescription"), !localizedDescription.isEmpty {
-            configuration.localizedDescription = localizedDescription
-        } else {
-            configuration.localizedDescription = "Card ending \(resolvedSuffix)"
+        if let controller = buildController(cardholderName: resolvedCardholderName, paymentNetwork: parsedPaymentNetwork) {
+            if let paymentNetworkRaw, parsedPaymentNetwork == nil {
+                lastAddCardInitDebugMessage = "paymentNetwork '\(paymentNetworkRaw)' is not recognized and was ignored."
+            } else {
+                lastAddCardInitDebugMessage = nil
+            }
+            return controller
         }
 
-        if let paymentNetworkRaw = call.getString("paymentNetwork"),
-           let paymentNetwork = Self.paymentNetwork(from: paymentNetworkRaw) {
-            configuration.paymentNetwork = paymentNetwork
+        if parsedPaymentNetwork != nil,
+           let controllerWithoutNetwork = buildController(cardholderName: resolvedCardholderName, paymentNetwork: nil) {
+            lastAddCardInitDebugMessage = "Failed with paymentNetwork='\(paymentNetworkRaw ?? "nil")', succeeded without paymentNetwork."
+            return controllerWithoutNetwork
         }
 
-        return PKAddPaymentPassViewController(requestConfiguration: configuration, delegate: self)
+        if resolvedCardholderName != "Cardholder" {
+            if let controllerWithFallbackName = buildController(cardholderName: "Cardholder", paymentNetwork: nil) {
+                lastAddCardInitDebugMessage = "Failed with provided cardholderName, succeeded with fallback cardholderName and no paymentNetwork."
+                return controllerWithFallbackName
+            }
+
+            if let controllerWithFallbackNameAndNetwork = buildController(cardholderName: "Cardholder", paymentNetwork: parsedPaymentNetwork) {
+                lastAddCardInitDebugMessage = "Failed with provided cardholderName, succeeded with fallback cardholderName."
+                return controllerWithFallbackNameAndNetwork
+            }
+        }
+
+        lastAddCardInitDebugMessage = "Controller init failed for all tested configurations. paymentNetwork=\(paymentNetworkRaw ?? "nil"), suffix=\(resolvedSuffix), cardholderNameLength=\(resolvedCardholderName.count)"
+        return nil
     }
 
     private func makePaymentRequest(from call: CAPPluginCall) -> PKPaymentRequest? {
@@ -507,6 +559,7 @@ public class CapacitorApplePayPlugin: CAPPlugin, CAPBridgedPlugin {
         pendingAddCardCall = nil
         pendingAddCardCompletion = nil
         pendingAddCardCardId = nil
+        lastAddCardInitDebugMessage = nil
     }
 
     private func resetPaymentState() {
